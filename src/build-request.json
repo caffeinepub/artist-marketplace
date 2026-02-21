@@ -1,0 +1,172 @@
+{
+  "kind": "build_request",
+  "title": "Add artist profile creation in profile settings with item posting and Stripe configuration capabilities",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-12",
+      "text": "Add an 'Artist Profile' or 'Settings' navigation item in the Header component that is visible to authenticated users, linking to a new settings page route",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "create artist in profile settings"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header component displays a 'Settings' or 'Profile Settings' link when user is authenticated",
+        "Link navigates to the settings page route",
+        "Link is positioned appropriately in the navigation menu"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Create a new Settings page route (/settings) that displays artist profile configuration options including the ability to enable artist mode and configure Stripe payment settings",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "create artist in profile settings, this should allow to post items, and configure stripe payments"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Settings page is accessible at /settings route",
+        "Page requires authentication to access",
+        "Page displays current user profile information",
+        "Page includes a toggle or checkbox to enable 'Artist' status",
+        "Page integrates the existing StripePaymentSetup component for Stripe configuration"
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Add an 'isArtist' boolean field to the User type in the backend data model to track whether a user has artist privileges for posting items",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "create artist in profile settings, this should allow to post items"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User type in backend/main.mo includes isArtist field",
+        "Field defaults to false for new users",
+        "Field can be updated through profile mutations"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Create a backend mutation to update a user's artist status (isArtist field), allowing users to enable or disable artist mode from their profile settings",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "create artist in profile settings, this should allow to post items"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes an updateArtistStatus or similar mutation",
+        "Mutation accepts caller principal and boolean value for artist status",
+        "Mutation updates the user's isArtist field",
+        "Mutation returns success confirmation or error"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Update the CreateItemForm component to check that the authenticated user has artist status (isArtist = true) before allowing item creation, displaying an appropriate message if the user is not an artist",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "create artist in profile settings, this should allow to post items"
+        ]
+      },
+      "acceptanceCriteria": [
+        "CreateItemForm checks user's isArtist status from profile query",
+        "Form displays a message prompting users to enable artist mode in settings if isArtist is false",
+        "Message includes a link to the settings page",
+        "Form only allows submission if user has artist status enabled"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Move the Stripe configuration interface from the admin-only AdminPage to the new Settings page, allowing individual artists to configure their own Stripe payment settings for receiving payments",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "create artist in profile settings, this should allow to post items, and configure stripe payments"
+        ]
+      },
+      "acceptanceCriteria": [
+        "StripePaymentSetup component is rendered in the Settings page",
+        "Artists can configure their own Stripe secret key and allowed countries",
+        "Stripe configuration is scoped to the individual artist's account",
+        "Configuration interface is only visible to users with artist status enabled"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Update the backend Stripe configuration storage to be user-scoped rather than platform-wide, allowing each artist to maintain their own Stripe settings for receiving payments on their sold items",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "configure stripe payments"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores Stripe configuration per user/artist rather than globally",
+        "Each artist's Stripe settings are isolated from other artists",
+        "Stripe configuration queries and mutations accept user principal to retrieve/update the correct settings",
+        "Payment processing uses the seller's Stripe configuration when processing item purchases"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Create a React Query hook for fetching and updating the current user's artist status, enabling the Settings page to display and toggle artist mode",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ]
+      },
+      "acceptanceCriteria": [
+        "useQueries.ts exports useArtistStatus query hook",
+        "Hook provides current user's isArtist value",
+        "Hook exports useUpdateArtistStatus mutation for toggling artist status",
+        "Mutation invalidates relevant queries on success"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui",
+    "Maintain single-actor architecture in backend/main.mo",
+    "Preserve existing Stripe payment flow and 10% platform fee calculation",
+    "Do not break existing item creation, browsing, or purchasing functionality"
+  ],
+  "nonGoals": [
+    "Multi-backend or microservices architecture",
+    "External database integration",
+    "Third-party authentication beyond Internet Identity",
+    "Real-time chat or messaging features",
+    "Removing admin-level Stripe configuration entirely (admin may still need platform-wide settings)"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

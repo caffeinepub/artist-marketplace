@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Artist marketplace platform for creators to list and sell original works (songs, videos, images, 3D prints, ceramics, paintings, etc.) with multi-photo uploads, auto-generated descriptions, Stripe payments (10% platform fee), and admin configuration controls",
+  "architectural_notes": [
+    "Stripe integration required for payment processing",
+    "Platform fee structure: 10% on all transactions",
+    "Multi-media support needed (images, videos, audio, 3D files)",
+    "File upload system must handle multiple photos per listing",
+    "Admin dashboard for configuration and branding customization",
+    "Artist profile creation required before users can post items or configure payment settings"
+  ],
+  "known_issues": [
+    "Item posting fails with 'user not found' error - authentication/user lookup issue preventing listing creation"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-an-item-listing-creation-flow-where-creators-can-upload-multiple-photos-select-a-category-set-a-price-and-submit-for-auto-generated-description",
+      "title": "Create an item listing creation flow where creators can upload multiple photos, select a category, set a price, and submit for auto-generated description",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-auto-generated-item-descriptions-using-a-placeholder-generation-function-with-full-editing-capability-allowing-creators-to-modify-the-generated-text-before-saving",
+      "title": "Implement auto-generated item descriptions using a placeholder generation function, with full editing capability allowing creators to modify the generated text before saving",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-stripe-payment-processing-for-item-purchases-automatically-calculating-and-applying-a-10-platform-fee-on-each-transaction",
+      "title": "Integrate Stripe payment processing for item purchases, automatically calculating and applying a 10% platform fee on each transaction",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-admin-dashboard-with-controls-for-platform-branding-name-logo-colors-and-configuration-settings-fee-percentage-featured-items",
+      "title": "Create admin dashboard with controls for platform branding (name, logo, colors) and configuration settings (fee percentage, featured items)",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-marketplace-browse-page-displaying-all-listed-items-in-a-grid-layout-with-photos-titles-prices-and-category-filters",
+      "title": "Build a marketplace browse page displaying all listed items in a grid layout with photos, titles, prices, and category filters",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-item-detail-page-showing-all-uploaded-photos-in-a-gallery-full-description-price-creator-info-and-purchase-button",
+      "title": "Create item detail page showing all uploaded photos in a gallery, full description, price, creator info, and purchase button",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-a-creative-artisan-focused-visual-theme-with-warm-earthy-tones-and-elegant-typography-that-conveys-craftsmanship-and-authenticity-applying-it-consistently-across-all-pages",
+      "title": "Design a creative, artisan-focused visual theme with warm, earthy tones and elegant typography that conveys craftsmanship and authenticity, applying it consistently across all pages",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-the-createitemform-component-properly-handles-authentication-state-and-displays-appropriate-error-messages-if-user-lookup-fails",
+      "title": "Verify that the CreateItemForm component properly handles authentication state and displays appropriate error messages if user lookup fails",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-artist-profile-or-settings-navigation-item-in-the-header-component-that-is-visible-to-authenticated-users-linking-to-a-new-settings-page-route",
+      "title": "Add an 'Artist Profile' or 'Settings' navigation item in the Header component that is visible to authenticated users, linking to a new settings page route",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-settings-page-route-settings-that-displays-artist-profile-configuration-options-including-the-ability-to-enable-artist-mode-and-configure-stripe-payment-settings",
+      "title": "Create a new Settings page route (/settings) that displays artist profile configuration options including the ability to enable artist mode and configure Stripe payment settings",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-createitemform-component-to-check-that-the-authenticated-user-has-artist-status-isartist-true-before-allowing-item-creation-displaying-an-appropriate-message-if-the-user-is-not-an-artist",
+      "title": "Update the CreateItemForm component to check that the authenticated user has artist status (isArtist = true) before allowing item creation, displaying an appropriate message if the user is not an artist",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-move-the-stripe-configuration-interface-from-the-admin-only-adminpage-to-the-new-settings-page-allowing-individual-artists-to-configure-their-own-stripe-payment-settings-for-receiving-payments",
+      "title": "Move the Stripe configuration interface from the admin-only AdminPage to the new Settings page, allowing individual artists to configure their own Stripe payment settings for receiving payments",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-react-query-hook-for-fetching-and-updating-the-current-user-s-artist-status-enabling-the-settings-page-to-display-and-toggle-artist-mode",
+      "title": "Create a React Query hook for fetching and updating the current user's artist status, enabling the Settings page to display and toggle artist mode",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Item listing system with multiple photo uploads",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Auto-generate item descriptions with full editing capability",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Stripe payment integration with 10% platform fee",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Admin controls for branding and configuration",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Support for multiple item types (songs, videos, images, 3D prints, ceramics, paintings)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Create a data model for marketplace items supporting multiple categories (songs, videos, images, 3D prints, ceramics, paintings) with fields for title, description, price, category, creator ID, and creation timestamp",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Implement backend storage for multiple photo uploads per item, storing image data as blobs with references to parent items",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Debug and fix the 'user not found' error that occurs when authenticated users attempt to create item listings, ensuring that user profile lookup or creation succeeds before allowing item creation",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Create artist profile in settings to enable item posting and Stripe payment configuration",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add an 'isArtist' boolean field to the User type in the backend data model to track whether a user has artist privileges for posting items",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Create a backend mutation to update a user's artist status (isArtist field), allowing users to enable or disable artist mode from their profile settings",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Update the backend Stripe configuration storage to be user-scoped rather than platform-wide, allowing each artist to maintain their own Stripe settings for receiving payments on their sold items",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Artist Marketplace",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        
+        /* Warm artisan color palette - Light mode */
+        --background: 0.98 0.01 40;
+        --foreground: 0.25 0.02 30;
+        
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.02 30;
+        
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.02 30;
+        
+        --primary: 0.55 0.15 35;
+        --primary-foreground: 0.98 0.01 40;
+        
+        --secondary: 0.88 0.03 60;
+        --secondary-foreground: 0.35 0.02 30;
+        
+        --muted: 0.92 0.02 50;
+        --muted-foreground: 0.50 0.02 30;
+        
+        --accent: 0.75 0.12 80;
+        --accent-foreground: 0.30 0.02 30;
+        
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0.01 40;
+        
+        --border: 0.88 0.02 50;
+        --input: 0.88 0.02 50;
+        --ring: 0.55 0.15 35;
+        
+        --chart-1: 0.60 0.18 35;
+        --chart-2: 0.65 0.15 80;
+        --chart-3: 0.70 0.12 120;
+        --chart-4: 0.55 0.20 25;
+        --chart-5: 0.75 0.10 60;
+    }
+
+    .dark {
+        /* Warm artisan color palette - Dark mode */
+        --background: 0.20 0.02 30;
+        --foreground: 0.95 0.01 40;
+        
+        --card: 0.25 0.02 30;
+        --card-foreground: 0.95 0.01 40;
+        
+        --popover: 0.22 0.02 30;
+        --popover-foreground: 0.95 0.01 40;
+        
+        --primary: 0.70 0.15 40;
+        --primary-foreground: 0.20 0.02 30;
+        
+        --secondary: 0.30 0.02 35;
+        --secondary-foreground: 0.95 0.01 40;
+        
+        --muted: 0.35 0.02 35;
+        --muted-foreground: 0.70 0.02 40;
+        
+        --accent: 0.45 0.08 50;
+        --accent-foreground: 0.95 0.01 40;
+        
+        --destructive: 0.60 0.20 25;
+        --destructive-foreground: 0.95 0.01 40;
+        
+        --border: 0.35 0.02 35;
+        --input: 0.35 0.02 35;
+        --ring: 0.70 0.15 40;
+        
+        --chart-1: 0.65 0.18 35;
+        --chart-2: 0.70 0.15 80;
+        --chart-3: 0.75 0.12 120;
+        --chart-4: 0.60 0.20 25;
+        --chart-5: 0.80 0.10 60;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+@layer utilities {
+    .gallery-spacing {
+        @apply space-y-8;
+    }
+    
+    .artisan-shadow {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+}

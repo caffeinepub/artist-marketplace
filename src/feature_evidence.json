@@ -1,0 +1,116 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-an-artist-profile-or-settings-navigation-item-in-the-header-component-that-is-visible-to-authenticated-users-linking-to-a-new-settings-page-route",
+      "featureTitle": "Add an 'Artist Profile' or 'Settings' navigation item in the Header component that is visible to authenticated users, linking to a new settings page route",
+      "files": [
+        "frontend/src/components/Header.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "http-outcalls@3.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-new-settings-page-route-settings-that-displays-artist-profile-configuration-options-including-the-ability-to-enable-artist-mode-and-configure-stripe-payment-settings",
+      "featureTitle": "Create a new Settings page route (/settings) that displays artist profile configuration options including the ability to enable artist mode and configure Stripe payment settings",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/SettingsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "http-outcalls@3.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-createitemform-component-to-check-that-the-authenticated-user-has-artist-status-isartist-true-before-allowing-item-creation-displaying-an-appropriate-message-if-the-user-is-not-an-artist",
+      "featureTitle": "Update the CreateItemForm component to check that the authenticated user has artist status (isArtist = true) before allowing item creation, displaying an appropriate message if the user is not an artist",
+      "files": [
+        "frontend/src/components/CreateItemForm.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "http-outcalls@3.0.0"
+      ],
+      "testIds": [
+        "REQ-16"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-move-the-stripe-configuration-interface-from-the-admin-only-adminpage-to-the-new-settings-page-allowing-individual-artists-to-configure-their-own-stripe-payment-settings-for-receiving-payments",
+      "featureTitle": "Move the Stripe configuration interface from the admin-only AdminPage to the new Settings page, allowing individual artists to configure their own Stripe payment settings for receiving payments",
+      "files": [
+        "frontend/src/pages/SettingsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "http-outcalls@3.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-react-query-hook-for-fetching-and-updating-the-current-user-s-artist-status-enabling-the-settings-page-to-display-and-toggle-artist-mode",
+      "featureTitle": "Create a React Query hook for fetching and updating the current user's artist status, enabling the Settings page to display and toggle artist mode",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "http-outcalls@3.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

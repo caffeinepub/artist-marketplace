@@ -3,7 +3,7 @@ import Stripe "stripe/stripe";
 import OutCall "http-outcalls/outcall";
 import MixinStorage "blob-storage/Mixin";
 import MixinAuthorization "authorization/MixinAuthorization";
-import Migration "migration";
+
 import Map "mo:core/Map";
 import Iter "mo:core/Iter";
 import Principal "mo:core/Principal";
@@ -13,7 +13,7 @@ import Order "mo:core/Order";
 import Time "mo:core/Time";
 import Runtime "mo:core/Runtime";
 
-(with migration = Migration.run)
+
 actor {
   include MixinStorage();
 

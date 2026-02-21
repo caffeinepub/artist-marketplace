@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
+  "projectStateVersion": 9,
   "summary": "Artist marketplace platform for creators to list and sell original works (songs, videos, images, 3D prints, ceramics, paintings, etc.) with multi-photo uploads, auto-generated descriptions, Stripe payments (10% platform fee), and admin configuration controls",
   "architectural_notes": [
     "Stripe integration required for payment processing",
@@ -8,7 +8,8 @@
     "Multi-media support needed (images, videos, audio, 3D files)",
     "File upload system must handle multiple photos per listing",
     "Admin dashboard for configuration and branding customization",
-    "Artist profile creation required before users can post items or configure payment settings"
+    "Artist profile creation required before users can post items or configure payment settings",
+    "Item creation flow must validate Stripe configuration before allowing listings - redirect to profile setup if incomplete"
   ],
   "known_issues": [
     "Item posting fails with 'user not found' error - authentication/user lookup issue preventing listing creation"
@@ -118,6 +119,14 @@
         "REQ-19"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-createitemform-component-to-check-if-the-authenticated-user-has-configured-stripe-settings-before-allowing-item-creation-if-stripe-is-not-configured-display-a-message-guiding-the-user-to-complete-their-artist-profile-in-settings-first-with-a-prominent-link-to-the-settings-page",
+      "title": "Update the CreateItemForm component to check if the authenticated user has configured Stripe settings before allowing item creation. If Stripe is not configured, display a message guiding the user to complete their artist profile in Settings first, with a prominent link to the Settings page.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -202,6 +211,20 @@
       "summary": "Update the backend Stripe configuration storage to be user-scoped rather than platform-wide, allowing each artist to maintain their own Stripe settings for receiving payments on their sold items",
       "reqIds": [
         "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Require Stripe setup before item creation - guide users to complete artist profile if Stripe not configured",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Add a query hook in useQueries.ts to fetch the current user's Stripe configuration status, enabling the CreateItemForm to check if Stripe settings are configured before allowing item creation.",
+      "reqIds": [
+        "REQ-21"
       ],
       "status": "pending"
     }

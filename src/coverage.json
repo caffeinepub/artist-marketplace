@@ -1,56 +1,18 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-21T01:58:05.934Z",
+  "generatedAt": "2026-02-21T02:41:39.601Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 8,
-    "implemented": 5,
+    "total": 2,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-12",
-        "summary": "Add an 'Artist Profile' or 'Settings' navigation item in the Header component that is visible to authenticated users, linking to a new settings page route",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/Header.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/Header.tsx"
-        ]
-      },
-      {
-        "id": "REQ-13",
-        "summary": "Create a new Settings page route (/settings) that displays artist profile configuration options including the ability to enable artist mode and configure Stripe payment settings",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/SettingsPage.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/SettingsPage.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-14",
-        "summary": "Add an 'isArtist' boolean field to the User type in the backend data model to track whether a user has artist privileges for posting items",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-15",
-        "summary": "Create a backend mutation to update a user's artist status (isArtist field), allowing users to enable or disable artist mode from their profile settings",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-16",
-        "summary": "Update the CreateItemForm component to check that the authenticated user has artist status (isArtist = true) before allowing item creation, displaying an appropriate message if the user is not an artist",
+        "id": "REQ-20",
+        "summary": "Update the CreateItemForm component to check if the authenticated user has configured Stripe settings before allowing item creation. If Stripe is not configured, display a message guiding the user to complete their artist profile in Settings first, with a prominent link to the Settings page.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/CreateItemForm.tsx"
@@ -60,53 +22,22 @@
         ]
       },
       {
-        "id": "REQ-17",
-        "summary": "Move the Stripe configuration interface from the admin-only AdminPage to the new Settings page, allowing individual artists to configure their own Stripe payment settings for receiving payments",
-        "status": "implemented",
+        "id": "REQ-21",
+        "summary": "Add a query hook in useQueries.ts to fetch the current user's Stripe configuration status, enabling the CreateItemForm to check if Stripe settings are configured before allowing item creation.",
+        "status": "missing",
         "plannedFiles": [
-          "frontend/src/pages/SettingsPage.tsx"
+          "frontend/src/hooks/useQueries.ts"
         ],
-        "matchedFiles": [
-          "frontend/src/pages/SettingsPage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-18",
-        "summary": "Update the backend Stripe configuration storage to be user-scoped rather than platform-wide, allowing each artist to maintain their own Stripe settings for receiving payments on their sold items",
-        "status": "unknown",
-        "plannedFiles": [],
         "matchedFiles": []
-      },
-      {
-        "id": "REQ-19",
-        "summary": "Create a React Query hook for fetching and updating the current user's artist status, enabling the Settings page to display and toggle artist mode",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts"
-        ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
     "frontend/src/components/CreateItemForm.tsx",
-    "frontend/src/components/Header.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/SettingsPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

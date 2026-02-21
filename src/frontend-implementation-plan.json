@@ -1,95 +1,40 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add artist profile creation in profile settings with item posting and Stripe configuration capabilities",
+  "title": "Require Stripe setup before item creation with profile completion guidance",
   "requirements": [
     {
-      "id": "REQ-12",
-      "summary": "Add Settings navigation link to Header for authenticated users",
+      "id": "REQ-21",
+      "summary": "Add query hook to fetch current user's Stripe configuration status",
       "acceptanceCriteria": [
-        "Header component displays a 'Settings' or 'Profile Settings' link when user is authenticated",
-        "Link navigates to the settings page route",
-        "Link is positioned appropriately in the navigation menu"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/Header.tsx",
-          "operation": "modify",
-          "description": "Add a 'Settings' navigation link that is visible only when user is authenticated (identity is present). Position it between the 'Create Item' link and the admin link in the navigation menu. Use consistent styling with existing navigation links and ensure it appears in both desktop and mobile menus."
-        }
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "summary": "Create Settings page with artist mode toggle and Stripe configuration",
-      "acceptanceCriteria": [
-        "Settings page is accessible at /settings route",
-        "Page requires authentication to access",
-        "Page displays current user profile information",
-        "Page includes a toggle or checkbox to enable 'Artist' status",
-        "Page integrates the existing StripePaymentSetup component for Stripe configuration"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/SettingsPage.tsx",
-          "operation": "create",
-          "description": "Create a new settings page that checks authentication status and displays an access denied screen if not authenticated. Include sections for: (1) user profile information display, (2) artist status toggle using the useArtistStatus and useUpdateArtistStatus hooks from useQueries, and (3) conditional rendering of the StripePaymentSetup component that is only visible when the user has artist status enabled (isArtist is true). Use appropriate headings and layout similar to AdminPage."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Register the /settings route in the router configuration, mapping it to the SettingsPage component. Position it after the /create route and before the /admin route in the routes array."
-        }
-      ]
-    },
-    {
-      "id": "REQ-16",
-      "summary": "Add artist status check to CreateItemForm with prompt to enable artist mode",
-      "acceptanceCriteria": [
-        "CreateItemForm checks user's isArtist status from profile query",
-        "Form displays a message prompting users to enable artist mode in settings if isArtist is false",
-        "Message includes a link to the settings page",
-        "Form only allows submission if user has artist status enabled"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/CreateItemForm.tsx",
-          "operation": "modify",
-          "description": "Add useArtistStatus hook to check if the current user has artist status. If isArtist is false, display a prominent message above the form stating that artist mode must be enabled to post items, include a link to '/settings' using TanStack Router's Link component, and disable the form submission. If isArtist is true, render the form normally. Handle loading state while fetching artist status."
-        }
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "summary": "Display Stripe configuration in Settings page for artists",
-      "acceptanceCriteria": [
-        "StripePaymentSetup component is rendered in the Settings page",
-        "Artists can configure their own Stripe secret key and allowed countries",
-        "Stripe configuration is scoped to the individual artist's account",
-        "Configuration interface is only visible to users with artist status enabled"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/SettingsPage.tsx",
-          "operation": "modify",
-          "description": "Ensure the StripePaymentSetup component is conditionally rendered within the Settings page only when isArtist is true. Add a section heading like 'Payment Settings' above the component. The component already handles Stripe configuration through existing backend capabilities (isStripeConfigured, setStripeConfiguration)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-19",
-      "summary": "Create React Query hooks for artist status management",
-      "acceptanceCriteria": [
-        "useQueries.ts exports useArtistStatus query hook",
-        "Hook provides current user's isArtist value",
-        "Hook exports useUpdateArtistStatus mutation for toggling artist status",
-        "Mutation invalidates relevant queries on success"
+        "New React Query hook getUserStripeConfig is created that calls the backend getUserStripeConfig method",
+        "The hook returns the user's Stripe configuration if it exists, or null/undefined if not configured",
+        "The hook is properly typed with TypeScript interfaces matching the backend StripeConfig type",
+        "The hook uses the actor instance from useActor and handles authentication state correctly"
       ],
       "file_operations": [
         {
           "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Add useArtistStatus query hook that calls actor.isArtist() to fetch the current user's artist status, enabled only when actor is available and user is authenticated. Add useUpdateArtistStatus mutation hook that accepts a boolean parameter and calls actor.updateArtistStatus(isArtist). On successful mutation, invalidate the 'artistStatus' query key and the 'currentUserProfile' query key to refresh dependent data."
+          "description": "Add a new React Query hook getUserStripeConfig that fetches the current user's Stripe configuration status by calling the backend actor method. The hook should return null if Stripe is not configured, use proper TypeScript typing for StripeConfiguration interface, depend on the actor from useActor, and follow the same patterns as existing query hooks in this file (e.g., useGetCallerUserProfile). Include proper error handling and enabled state management."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Update CreateItemForm to check Stripe configuration before allowing item creation",
+      "acceptanceCriteria": [
+        "CreateItemForm checks if the current user has Stripe configuration before rendering the item creation form",
+        "If Stripe is not configured, the form displays a clear message explaining that Stripe setup is required",
+        "The message includes a clickable link or button that navigates to the Settings page (/settings)",
+        "The actual item creation form fields are hidden or disabled until Stripe configuration is complete",
+        "The check uses the existing getUserStripeConfig query hook to determine Stripe configuration status"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CreateItemForm.tsx",
+          "operation": "modify",
+          "description": "Add Stripe configuration check before allowing item creation. Import and use the getUserStripeConfig hook from useQueries.ts. If Stripe is not configured (returns null), display a user-friendly message explaining that Stripe setup is required to create items, with a prominent link/button to navigate to /settings. Hide or disable the actual form fields (title, description, price, category, images) until Stripe configuration is complete. Preserve the existing isArtist check and validation logic. Use TanStack Router's Link component for navigation to /settings. Display loading state while checking Stripe configuration status."
         }
       ]
     }

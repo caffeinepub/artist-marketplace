@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { useAddItem, useGenerateItemDescription, useArtistStatus } from '../hooks/useQueries';
+import { useAddItem, useGenerateItemDescription, useArtistStatus, useIsStripeConfigured } from '../hooks/useQueries';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -18,6 +18,7 @@ export default function CreateItemForm() {
   const addItem = useAddItem();
   const generateDescription = useGenerateItemDescription();
   const { data: isArtist, isLoading: artistStatusLoading } = useArtistStatus();
+  const { data: isStripeConfigured, isLoading: stripeConfigLoading } = useIsStripeConfigured();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -100,7 +101,7 @@ export default function CreateItemForm() {
     }
   };
 
-  if (artistStatusLoading) {
+  if (artistStatusLoading || stripeConfigLoading) {
     return (
       <div className="flex items-center justify-center py-12">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -119,6 +120,23 @@ export default function CreateItemForm() {
               Go to Settings
             </Link>{' '}
             to enable artist status and configure your payment settings.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
+
+  if (!isStripeConfigured) {
+    return (
+      <div className="container max-w-2xl py-12">
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            You need to configure your Stripe payment settings before creating items.{' '}
+            <Link to="/settings" className="underline font-medium">
+              Go to Settings
+            </Link>{' '}
+            to complete your artist profile with payment information.
           </AlertDescription>
         </Alert>
       </div>

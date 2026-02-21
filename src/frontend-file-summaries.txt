@@ -9,7 +9,7 @@
   "frontend/src/components/CategoryFilter.tsx": "Filter component with buttons for all item categories (music, video, images, 3D prints, ceramics, paintings) plus \"All\" option.",
   "frontend/src/components/ImageGallery.tsx": "Image gallery with main display, thumbnail navigation, and prev/next controls for browsing multiple item photos.",
   "frontend/src/components/PurchaseButton.tsx": "Purchase button that creates Stripe checkout session and redirects to payment flow, with loading states and error handling.",
-  "frontend/src/components/CreateItemForm.tsx": "Form for creating new marketplace items with artist status check, multi-image upload, category selection, price input, and AI description generation; displays prompt to enable artist mode if user is not an artist.",
+  "frontend/src/components/CreateItemForm.tsx": "Form for creating new marketplace items with artist status check, Stripe configuration verification, multi-image upload, category selection, price input, and AI description generation; displays prompts to enable artist mode or complete Stripe setup if requirements are not met.",
   "frontend/src/components/EditItemForm.tsx": "Form for editing existing items with all fields editable and description regeneration capability.",
   "frontend/src/components/AdminDashboard.tsx": "Tabbed admin interface for managing platform branding (name, logo, colors) and configuration (fee percentage).",
   "frontend/src/components/StripePaymentSetup.tsx": "Admin component for configuring Stripe payment processing with secret key and allowed countries input.",
